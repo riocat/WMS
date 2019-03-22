@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%-5level] [%logger{50}] %msg%n</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+	</appender>
+
+	<appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>/log/wms/wms.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%-5level] [%logger] %msg%n</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+	</appender>
+
+	<!--additivity logger的上级logger(这里是root，级别和包路径相关)是否在输出一遍log  mybatis的sql等输出属于debug级别-->
+	<logger name="com.gt.wms.Dao" level="debug" additivity="flase"></logger>
+
+	<logger name="com.gt.wms.Controller" level="debug" additivity="flase"></logger>
+
+	<root level="info">
+		<appender-ref ref="stdout" />
+		<appender-ref ref="file" />
+	</root>
+
+</configuration>
