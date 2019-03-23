@@ -3,6 +3,7 @@ package com.gt.wms.Service.impl;
 import com.gt.wms.Dao.UserDao;
 import com.gt.wms.Entity.User;
 import com.gt.wms.Service.UserService;
+import com.gt.wms.util.UUIDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -29,7 +30,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int addUser(User user) throws Exception {
-		return 0;
+		user.setId(UUIDUtil.get36UUID());
+		return userDao.addUser(user);
 	}
 
 }

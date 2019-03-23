@@ -11,4 +11,52 @@
 		sys_user(name, password, email,create_time)
 		VALUES(#{name},#{password},#{email},now())
 	</insert>
+
+	<insert id="addUser" parameterType="com.gt.wms.Entity.User">
+		INSERT INTO [dbo].[sys_user] (
+			[id],
+			[loginid],
+			[name],
+			[password],
+			[password_change_flag],
+			[email],
+			[phone],
+			[address],
+			[user_type],
+			[note],
+			[last_login_time],
+			[status],
+			[token],
+			[is_delete],
+			[create_time],
+			[create_user],
+			[update_time],
+			[update_user],
+			[delete_user],
+			[delete_time]
+		)
+		VALUES
+		(
+			#{id},
+			#{loginid},
+			#{name},
+			#{password},
+			0,
+			#{email},
+			#{phone},
+			#{address},
+			#{user_type},
+			#{note},
+			NULL,
+			'1',
+			NULL,
+			'0',
+			GETDATE(),
+			#{create_user},
+			GETDATE(),
+			#{create_user},
+			NULL,
+			NULL
+		);
+	</insert>
 </mapper>

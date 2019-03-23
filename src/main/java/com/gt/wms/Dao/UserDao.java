@@ -4,7 +4,9 @@ import com.gt.wms.Entity.User;
 
 public interface UserDao {
 
-	public User getUserByName(String name);
+	User getUserByName(String name);
 	
-	public int regester(User user);
+	int regester(User user);
+
+	int addUser(User user);
 }
