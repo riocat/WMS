@@ -251,7 +251,7 @@
         </div>
 
         <div class="content" style="padding: 2px;">
-            <iframe height="100%" width="100%" src="redirectToJSP?jpsName=userList" scrolling="true" frameborder="0">
+            <iframe height="100%" width="100%" src="user/userList" scrolling="true" frameborder="0">
             </iframe>
         </div>
     </div>

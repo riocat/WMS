@@ -196,7 +196,7 @@
 <script>
     $(function() {
         $('#addBtn').click(function() {
-            $('#addBtn').disable();
+//            $('#addBtn').disabled();
             var newuser = {};
             newuser.loginid = $('#loginid').val();
             newuser.name = $('#name').val();
@@ -215,12 +215,12 @@
                 contentType:"application/json;charset=UTF-8",
                 success: function (responseData) {
                     if (responseData.result == 'success') {
-                        location.href = "logined/main";
+                        location.href = "user/userList";
                     }
                 }
             }).fail(function() {
                 alert( "无法连接服务器，请稍后重试" );
-                $('#addBtn').enable();
+//                $('#addBtn').enabled();
             })
         });
     });

@@ -8,15 +8,11 @@ import java.util.UUID;
 public class UUIDUtil {
 
     public synchronized static String get36UUID() {
-        String targetValue = UUID.randomUUID().toString();
-        System.out.println(targetValue);
-        return "";
+        return UUID.randomUUID().toString();
     }
 
     public synchronized static String get32UUID() {
-        String targetValue = UUID.randomUUID().toString().replaceAll("-", "");
-        System.out.println(targetValue);
-        return "";
+        return UUID.randomUUID().toString().replaceAll("-", "");
     }
 
     public static void main(String[] args) {

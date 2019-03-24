@@ -28,6 +28,9 @@ public class User implements Serializable {
     private String delete_user;
     private Date delete_time;
 
+    private String store_region_name;
+    private String store_name;
+
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
@@ -190,5 +193,21 @@ public class User implements Serializable {
 
     public void setDelete_time(Date delete_time) {
         this.delete_time = delete_time;
+    }
+
+    public String getStore_region_name() {
+        return store_region_name;
+    }
+
+    public void setStore_region_name(String store_region_name) {
+        this.store_region_name = store_region_name;
+    }
+
+    public String getStore_name() {
+        return store_name;
+    }
+
+    public void setStore_name(String store_name) {
+        this.store_name = store_name;
     }
 }

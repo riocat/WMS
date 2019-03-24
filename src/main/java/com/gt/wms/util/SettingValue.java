@@ -14,5 +14,11 @@ public class SettingValue {
 	
 //	@Value("${imageType}")
 //	public int imageType;
+
+	@Value("${dbtype}")
+	public String dbtype;
+
+	@Value("${pageSize}")
+	public int pageSize;
 	
 }

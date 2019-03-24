@@ -59,4 +59,82 @@
 			NULL
 		);
 	</insert>
+
+	<select id="getPageUserListMS" parameterType="Map" resultType="com.gt.wms.Entity.User">
+		SELECT
+			TOP ${pageSize} *
+		FROM
+			(
+				SELECT
+					row_number () OVER (ORDER BY create_time DESC) rownum ,
+					sys_user.*,
+					STUFF(
+						(
+						SELECT
+						',' + store_region.name
+						FROM
+						(
+						SELECT
+						*
+						FROM
+						user_to_store
+						WHERE
+						type = '1'
+						AND user_id = id
+						) coretemp
+						INNER JOIN store_region ON coretemp.area_id = store_region.id FOR XML PATH ('')
+						),
+						1,
+						1,
+						''
+					) store_region_name,
+					STUFF(
+						(
+						SELECT
+						',' + store.name
+						FROM
+						(
+						SELECT
+						*
+						FROM
+						user_to_store
+						WHERE
+						type = '2'
+						AND user_id = id
+						) coretemp
+						INNER JOIN store ON coretemp.area_id = store.id FOR XML PATH ('')
+						),
+						1,
+						1,
+						''
+					) store_name
+				FROM
+					sys_user
+				WHERE
+					1 = 1
+				<if test="selectName != null and selectName != ''">
+					AND (loginid LIKE '%'+#{selectName}+'%' OR name LIKE '%'+#{selectName}+'%')
+				</if>
+				<if test="selectType != null and selectType != ''">
+					AND user_type = #{selectType}
+				</if>
+			) coretem
+		WHERE
+			rownum > ${start};
+	</select>
+
+	<select id="getPageNumMS" parameterType="Map" resultType="int">
+		SELECT
+			COUNT(*) num
+		FROM
+			sys_user
+		WHERE
+			1 = 1
+		<if test="selectName != null and selectName != ''">
+			AND (loginid LIKE '%'+#{selectName}+'%' OR name LIKE '%'+#{selectName}+'%')
+		</if>
+		<if test="selectName != null and selectName != ''">
+			AND user_type = #{selectType}
+		</if>
+	</select>
 </mapper>

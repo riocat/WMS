@@ -2,6 +2,9 @@ package com.gt.wms.Service;
 
 import com.gt.wms.Entity.User;
 
+import java.util.List;
+import java.util.Map;
+
 public interface UserService {
 
 	public User getUserByName(String name);
@@ -10,4 +13,7 @@ public interface UserService {
 
 	public int addUser(User user) throws Exception;
 
+	List<User> getPageUserList(Map parMap);
+
+	int getPageNum(Map parMap);
 }
