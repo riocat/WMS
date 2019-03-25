@@ -129,7 +129,7 @@
                                     <input id="address" class="form-control">
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <div class="form-group">
                                 </div>
                             </div>
@@ -150,7 +150,7 @@
                                     <option>5</option>
                                 </select>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <div class="form-group">
                                 </div>
                             </div>
@@ -167,7 +167,7 @@
                                     <textarea id="note" class="form-control" rows="6"></textarea>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <div class="form-group">
                                 </div>
                             </div>
@@ -183,7 +183,7 @@
                             <div class="col-md-6">
                                 <button id="addBtn" class="btn btn-primary">添加</button>
                                 <button id="restBtn" class="btn btn-warning">重置</button>
-                                <button id="returnBtn" class="btn btn-secondary">返回</button>
+                                <button id="returnBtn" class="btn btn-secondary" onclick="goBack()">返回</button>
                             </div>
                         </div>
                     </div>
@@ -194,6 +194,11 @@
 </div>
 </body>
 <script>
+
+    function goBack(){
+        location.href = "user/userPageList";
+    }
+
     $(function() {
         $('#addBtn').click(function() {
 //            $('#addBtn').disabled();

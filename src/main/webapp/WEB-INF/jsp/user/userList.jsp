@@ -105,7 +105,7 @@
 <script>
 
     function toUserAddPage(){
-        location.href = "redirectToJSP?jpsName=userAdd";
+        location.href = "redirectToJSP?jpsName=user/userAdd";
     }
 
     function selectUsers(){

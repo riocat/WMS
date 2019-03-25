@@ -36,7 +36,7 @@ public class UserController {
                                     @RequestParam(defaultValue = "", required = false) String selectName,
                                     @RequestParam(defaultValue = "", required = false) String selectType,
                                     @RequestParam(defaultValue = "0", required = false) int pageSize) {
-        ModelAndView mav = new ModelAndView("userList");
+        ModelAndView mav = new ModelAndView("user/userList");
         Map parMap = new HashMap<>();
         if(pageSize == 0){
             pageSize = setting.pageSize;
