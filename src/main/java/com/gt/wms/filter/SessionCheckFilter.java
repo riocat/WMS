@@ -47,7 +47,7 @@ public class SessionCheckFilter implements Filter {
      * 第一种
      */
     /*
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		HttpServletRequest hsr = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
@@ -77,29 +77,27 @@ public class SessionCheckFilter implements Filter {
             if (user == null) {
                 HttpServletResponse res = (HttpServletResponse) response;
                 String servletPath = hsr.getServletPath();
-                if(!"/login.jsp".equals(servletPath)){
-                    for (String loginPath : loginPaths) {
-                        if (servletPath.matches(loginPath)) {
-                            String url = hsr.getContextPath();
-                            if(StringUtils.isEmpty(url)){
-                                url = "/";
-                            }
-                            res.sendRedirect(url);
-                            return;
-                        }
+                for (String loginPath : loginPaths) {
+                    if (servletPath.matches(loginPath)) {
+                        chain.doFilter(request, response);
+                        return;
                     }
                 }
+                String url = hsr.getContextPath();
+                res.sendRedirect(url);
+                return;
+            } else {
+                chain.doFilter(request, response);
+                return;
             }
         }
-
-        chain.doFilter(request, response);
     }
 
     /**
      * @see Filter#init(FilterConfig)
      */
     public void init(FilterConfig fConfig) throws ServletException {
-        String includePath = fConfig.getInitParameter("includePathPatterns");
+        String includePath = fConfig.getInitParameter("allowPathPatterns");
         String[] temp = includePath.split(",");
         this.loginPaths = Arrays.asList(temp);
 

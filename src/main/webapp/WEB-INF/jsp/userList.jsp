@@ -12,6 +12,7 @@
     <%@include file="/com/style.jsp"%>
     <script src="js/jqPaginator.js"></script>
     <link rel="stylesheet" href="css/jqPaginator.js.css">
+    <link rel="stylesheet" href="css/trbackground.css">
 </head>
 <body>
 <div class="content" style="padding:3px;">
@@ -40,6 +41,8 @@
                                     <option>4</option>
                                     <option>5</option>
                                 </select>
+<%--                                <select id="selectType" class="form-control">
+                                </select>--%>
                             </div>
 
                             <div class="col-md-1">
@@ -67,28 +70,26 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped">
+                            <table class="table table-bordered table-striped-row" style="word-wrap: break-word;">
                                 <thead>
-                                <tr>
-                                    <th>登录名</th>
-                                    <th>用户名</th>
-                                    <th>所属库区</th>
-                                    <th>所属仓库</th>
-                                    <th>用户类型</th>
-                                    <th>联系电话</th>
-                                    <th>操作</th>
-                                </tr>
+                                    <th max-width="10%">登录名</th>
+                                    <th max-width="10%">用户名</th>
+                                    <th max-width="20%">所属库区</th>
+                                    <th max-width="20%">所属仓库</th>
+                                    <th max-width="10%">用户类型</th>
+                                    <th max-width="20%">联系电话</th>
+                                    <th max-width="10%">操作</th>
                                 </thead>
                                 <tbody>
                                 <c:forEach items="${userList}" var="user">
                                     <tr>
-                                        <td>${user.loginid}</td>
-                                        <td>${user.name}</td>
-                                        <td>${user.store_region_name}</td>
-                                        <td>${user.store_name}</td>
-                                        <td>${user.user_type}</td>
-                                        <td>${user.phone}</td>
-                                        <td></td>
+                                        <td max-width="10%">${user.loginid}</td>
+                                        <td max-width="10%">${user.name}</td>
+                                        <td max-width="20%">${user.store_region_name}</td>
+                                        <td max-width="20%">${user.store_name}</td>
+                                        <td max-width="10%">${user.user_type}</td>
+                                        <td max-width="20%">${user.phone}</td>
+                                        <td max-width="10%"></td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>

@@ -133,7 +133,7 @@
 		<if test="selectName != null and selectName != ''">
 			AND (loginid LIKE '%'+#{selectName}+'%' OR name LIKE '%'+#{selectName}+'%')
 		</if>
-		<if test="selectName != null and selectName != ''">
+		<if test="selectType != null and selectType != ''">
 			AND user_type = #{selectType}
 		</if>
 	</select>

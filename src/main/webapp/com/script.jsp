@@ -9,5 +9,5 @@
 <script src="js/demo.js"></script>
 <script>
     var visiblePages = 10;
-    var defaultPageSize = 1;
+    var defaultPageSize = 10;
 </script>

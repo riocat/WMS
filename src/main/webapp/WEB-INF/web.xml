@@ -52,8 +52,8 @@
         <filter-name>SessionCheckFilter</filter-name>
         <filter-class>com.gt.wms.filter.SessionCheckFilter</filter-class>
         <init-param>
-            <param-name>includePathPatterns</param-name>
-            <param-value>/*</param-value>
+            <param-name>allowPathPatterns</param-name>
+            <param-value>/,/login.jsp,/login,.*\.(js|css|ico|png|jpg|eot|svg|ttf|woff|html)</param-value>
         </init-param>
         <init-param>
             <param-name>isSkip</param-name>
@@ -63,9 +63,6 @@
 
     <filter-mapping>
         <filter-name>SessionCheckFilter</filter-name>
-        <!-- 第一种 -->
-        <!-- 		<url-pattern>/logined/*</url-pattern> -->
-        <!-- 第二种 -->
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 </web-app>
