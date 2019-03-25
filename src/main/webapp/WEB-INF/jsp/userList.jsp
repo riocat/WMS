@@ -13,6 +13,7 @@
     <script src="js/jqPaginator.js"></script>
     <link rel="stylesheet" href="css/jqPaginator.js.css">
     <link rel="stylesheet" href="css/trbackground.css">
+    <link rel="stylesheet" href="css/pageCard.css">
 </head>
 <body>
 <div class="content" style="padding:3px;">
@@ -61,10 +62,10 @@
     <div class="content" style="padding: 0px 18px 0px 18px;">
         <div class="row">
             <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
+                <div class="card myCardMargin">
+                    <div class="card-body myCardbodyMargin">
                         <div class="table-responsive">
-                            <table class="table table-bordered table-striped-row" style="word-wrap: break-word;">
+                            <table class="table table-bordered table-striped-row myTableMargin" style="word-wrap: break-word;">
                                 <thead>
                                     <th max-width="10%">登录名</th>
                                     <th max-width="10%">用户名</th>
@@ -83,7 +84,11 @@
                                         <td max-width="20%">${user.store_name}</td>
                                         <td max-width="10%">${user.user_type}</td>
                                         <td max-width="20%">${user.phone}</td>
-                                        <td max-width="10%"></td>
+                                        <td max-width="10%">
+                                            <button class="btn btn-info btn-sm btn-group-sm-padding">详情</button>
+                                            <button class="btn btn-warning btn-sm btn-group-sm-padding">修改</button>
+                                            <button class="btn btn-danger btn-sm btn-group-sm-padding">删除</button>
+                                        </td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
@@ -117,7 +122,7 @@
         currentPage : b,
         onPageChange : function(num, type) {
             if(type!='init'){
-                location.href = "user/userPageList?next=" + num + "&selectName=" + escapeHtmlMax($('#selectName')).val()+"&selectType="+$('#selectType').val()+"&pageSize="+defaultPageSize;
+                location.href = "user/userPageList?next=" + num + "&selectName=" + escapeHtmlMax($('#selectName').val())+"&selectType="+$('#selectType').val()+"&pageSize="+defaultPageSize;
             }
         }
     });

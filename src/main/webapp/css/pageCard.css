@@ -1,0 +1,16 @@
+.myCardMargin{
+    margin-bottom: 0.1rem;
+}
+
+.myCardbodyMargin{
+    margin-bottom: 0.1rem;
+    padding: 0.3rem 1rem 0.2rem 1rem;
+}
+
+.myTableMargin{
+    margin-bottom: 0.2rem;
+}
+
+.btn-group-sm-padding{
+    padding: .01rem .5rem;
+}
