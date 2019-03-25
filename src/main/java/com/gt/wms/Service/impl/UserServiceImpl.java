@@ -45,6 +45,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public int getPageNum(Map parMap) {
         int num = userDao.getPageNum(parMap);
+        if(num == 0)
+            return 1;
         int pageSize = (int) parMap.get("pageSize");
         return num % pageSize == 0 ? num / pageSize : (num / pageSize + 1);
     }

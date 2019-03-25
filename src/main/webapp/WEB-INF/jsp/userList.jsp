@@ -36,13 +36,7 @@
                             <div class="col-md-3 form-group" style="margin-bottom: 0.3rem;padding-top: .375rem;">
                                 <select id="selectType" class="form-control">
                                     <option value="" style="display: none">请选择用户类型</option>
-                                    <option value="">2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
                                 </select>
-<%--                                <select id="selectType" class="form-control">
-                                </select>--%>
                             </div>
 
                             <div class="col-md-1">
@@ -110,24 +104,54 @@
     }
 
     function selectUsers(){
-        location.href = "user/userList?selectName=" + $('#selectName').val()+"&selectType"+$('#selectType').val()+"&pageSize="+defaultPageSize;
+        location.href = "user/userPageList?selectName=" + escapeHtmlMax($('#selectName').val())+"&selectType="+$('#selectType').val()+"&pageSize="+defaultPageSize;
     }
 
     var a = ${totalPages};
     var b = ${currentPage};
+    var selectName = '${selectName}'=='selectName'?'':'${selectName}';
+    var selectType = '${selectType}'=='selectType'?'':'${selectType}';
     $.jqPaginator('#pagination', {
         totalPages : a,
         visiblePages : visiblePages,
         currentPage : b,
         onPageChange : function(num, type) {
             if(type!='init'){
-                location.href = "user/userList?next=" + num + "&selectName=" + $('#selectName').val()+"&selectType"+$('#selectType').val()+"&pageSize="+defaultPageSize;
+                location.href = "user/userPageList?next=" + num + "&selectName=" + escapeHtmlMax($('#selectName')).val()+"&selectType="+$('#selectType').val()+"&pageSize="+defaultPageSize;
             }
         }
     });
 
     $(function() {
+        $.ajax({
+            method: "POST",
+            url: "sysCode/getSysCodeList",
+            data: JSON.stringify({type:'5'}),
+            async:true,
+            dataType:"json",
+            contentType:"application/json;charset=UTF-8",
+            success: function (responseData) {
+                try {
+                    if(responseData.result == 'success') {
+                        $('#selectType').html("");
+                        $('#selectType').append('<option value="" style="display: none">请选择用户类型</option>');
+                        var array = responseData.data;
+                        var listHtml = '';
+                        for(var i=0;i<array.length;i++){
+                            listHtml += '<option value="' + array[i].value + '">' + array[i].note + '</option>';
+                        }
+                        $("#selectType").append(listHtml);
+                    }
+                } catch(e) {
 
+                }
+            }
+        }).fail(function() {
+            alert( "无法连接服务器，请稍后重试" );
+        })
+
+        $('#selectName').val(selectName);
+        $('#selectType').val(selectType);
     });
 </script>
 </html>

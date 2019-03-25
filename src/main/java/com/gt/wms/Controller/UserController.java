@@ -4,6 +4,7 @@ import com.gt.wms.Entity.User;
 import com.gt.wms.Service.UserService;
 import com.gt.wms.util.JsonResultStatus;
 import com.gt.wms.util.SettingValue;
+import com.gt.wms.util.StringUtil;
 import com.gt.wms.vo.NewUrlBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,8 +31,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "user/userList")
-    public ModelAndView getUserList(@RequestParam(defaultValue = "1", required = false) int next,
+    @RequestMapping(value = "user/userPageList")
+    public ModelAndView getUserPageList(@RequestParam(defaultValue = "1", required = false) int next,
                                     @RequestParam(defaultValue = "", required = false) String selectName,
                                     @RequestParam(defaultValue = "", required = false) String selectType,
                                     @RequestParam(defaultValue = "0", required = false) int pageSize) {
@@ -46,8 +47,16 @@ public class UserController {
         parMap.put("selectType", selectType);
         mav.addObject("userList", userService.getPageUserList(parMap));
         mav.addObject("currentPage", next);
-        mav.addObject("selectName", selectName);
-        mav.addObject("selectType", selectType);
+        if(StringUtil.isNotEmpty(selectName)){
+            mav.addObject("selectName", selectName);
+        }else{
+            mav.addObject("selectName", "selectName");
+        }
+        if(StringUtil.isNotEmpty(selectType)){
+            mav.addObject("selectType", selectType);
+        }else{
+            mav.addObject("selectType", "selectType");
+        }
         mav.addObject("totalPages", userService.getPageNum(parMap));
         return mav;
     }
