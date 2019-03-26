@@ -45,10 +45,30 @@ public class UserServiceImpl implements UserService {
     @Override
     public int getPageNum(Map parMap) {
         int num = userDao.getPageNum(parMap);
-        if(num == 0)
+        if (num == 0)
             return 1;
         int pageSize = (int) parMap.get("pageSize");
         return num % pageSize == 0 ? num / pageSize : (num / pageSize + 1);
+    }
+
+    @Override
+    public int deleteUserById(User user) {
+        return userDao.deleteUserById(user);
+    }
+
+    @Override
+    public User getUserById(String id) {
+        return userDao.getUserById(id);
+    }
+
+    @Override
+    public int updateUser(User puser) {
+        return userDao.updateUser(puser);
+    }
+
+    @Override
+    public boolean uniqueCheck(User puser){
+        return userDao.uniqueCheck(puser)>=1?false:true;
     }
 
 }

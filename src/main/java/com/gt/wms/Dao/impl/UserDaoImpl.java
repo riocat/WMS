@@ -31,13 +31,17 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public int addUser(User user) {
-        return sqlSession.insert("addUser", user);
+        int rows = 0;
+        if ("MSSQL".equals(setting.dbtype)) {
+            rows = sqlSession.insert("addUserMS", user);
+        }
+        return rows;
     }
 
     @Override
     public List<User> getPageUserList(Map parMap) {
         List<User> users = null;
-        if("MSSQL".equals(setting.dbtype)){
+        if ("MSSQL".equals(setting.dbtype)) {
             users = sqlSession.selectList("getPageUserListMS", parMap);
         }
         return users;
@@ -46,10 +50,42 @@ public class UserDaoImpl implements UserDao {
     @Override
     public int getPageNum(Map parMap) {
         int num = 0;
-        if("MSSQL".equals(setting.dbtype)){
+        if ("MSSQL".equals(setting.dbtype)) {
             num = sqlSession.selectOne("getPageNumMS", parMap);
         }
         return num;
+    }
+
+    @Override
+    public int deleteUserById(User user) {
+        int rows = 0;
+        if ("MSSQL".equals(setting.dbtype)) {
+            rows = sqlSession.delete("deleteUserByIdMS", user);
+        }
+        return rows;
+    }
+
+    @Override
+    public User getUserById(String id) {
+        User user = null;
+        if ("MSSQL".equals(setting.dbtype)) {
+            user = sqlSession.selectOne("getUserByIdMS", id);
+        }
+        return user;
+    }
+
+    @Override
+    public int updateUser(User puser) {
+        int rows = 0;
+        if ("MSSQL".equals(setting.dbtype)) {
+            rows = sqlSession.insert("updateUserMS", puser);
+        }
+        return rows;
+    }
+
+    @Override
+    public int uniqueCheck(User puser) {
+        return sqlSession.selectOne("uniqueCheck", puser);
     }
 
 }

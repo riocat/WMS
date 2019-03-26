@@ -31,6 +31,8 @@ public class User implements Serializable {
     private String store_region_name;
     private String store_name;
 
+    private String user_type_name;
+
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
@@ -209,5 +211,13 @@ public class User implements Serializable {
 
     public void setStore_name(String store_name) {
         this.store_name = store_name;
+    }
+
+    public String getUser_type_name() {
+        return user_type_name;
+    }
+
+    public void setUser_type_name(String user_type_name) {
+        this.user_type_name = user_type_name;
     }
 }

@@ -9,6 +9,9 @@
     <title>仓储管理系统</title>
     <%@include file="/com/script.jsp"%>
     <%@include file="/com/style.jsp"%>
+    <script>
+        var targetId = '${targetId}';
+    </script>
 </head>
 <body>
 <div class="content" style="padding:3px;">
@@ -17,7 +20,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header bg-light">
-                        新增用户
+                        修改用户
                     </div>
 
                     <div class="card-body">
@@ -182,7 +185,6 @@
                             </div>
                             <div class="col-md-6">
                                 <button id="addBtn" class="btn btn-primary">保存</button>
-                                <button id="restBtn" class="btn btn-warning">重置</button>
                                 <button id="returnBtn" class="btn btn-secondary" onclick="goBack()">返回</button>
                             </div>
                         </div>
@@ -199,10 +201,37 @@
         location.href = "user/userPageList";
     }
 
+    function init(){
+        $.ajax({
+            method: "POST",
+            url: "user/getUserById?id="+targetId,
+            async:true,
+            contentType:"application/json;charset=UTF-8",
+            success: function (responseData) {
+                if (responseData.result == 'success') {
+                    var userData = responseData.data;
+                    $('#loginid').val(userData.loginid);
+                    $('#name').val(userData.name);
+                    $('#password').val(userData.password);
+                    $('#passwordConfirm').val(userData.password);
+                    $('#email').val(userData.email);
+                    $('#phone').val(userData.phone);
+                    $('#address').val(userData.address);
+                    $('#user_type').val(userData.user_type);
+                    $('#note').val(userData.note);
+                }
+            }
+        }).fail(function() {
+            alert( "无法连接服务器，请稍后重试" );
+        })
+    }
+
     $(function() {
+        init();
+
         $('#addBtn').click(function() {
-//            $('#addBtn').disabled();
             var newuser = {};
+            newuser.id = targetId;
             newuser.loginid = $('#loginid').val();
             newuser.name = $('#name').val();
             newuser.password = $('#password').val();
@@ -213,7 +242,7 @@
             newuser.note = $('#note').val();
             $.ajax({
                 method: "POST",
-                url: "user/addUser",
+                url: "user/updateUser",
                 data: JSON.stringify(newuser),
                 async:true,
                 dataType:"json",
@@ -225,7 +254,6 @@
                 }
             }).fail(function() {
                 alert( "无法连接服务器，请稍后重试" );
-//                $('#addBtn').enabled();
             })
         });
     });

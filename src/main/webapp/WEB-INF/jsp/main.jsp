@@ -18,7 +18,7 @@
         </a>
 
         <a class="navbar-brand" href="#">
-            <img src="/WMS/imgs/logo.png" alt="logo">
+            <img src="/imgs/logo.png" alt="logo">
         </a>
 
         <a href="#" class="btn btn-link sidebar-toggle d-md-down-none">
@@ -42,7 +42,7 @@
 
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="/WMS/imgs/avatar-1.png" class="avatar avatar-sm" alt="logo">
+                    <img src="/imgs/avatar-1.png" class="avatar avatar-sm" alt="logo">
                     <span class="small ml-1 d-md-down-none">John Smith</span>
                 </a>
 
@@ -82,7 +82,7 @@
                     <li class="nav-title">Navigation</li>
 
                     <li class="nav-item">
-                        <a href="/WMS/index.html" class="nav-link active">
+                        <a href="/index.html" class="nav-link active">
                             <i class="icon icon-speedometer"></i> Dashboard
                         </a>
                     </li>

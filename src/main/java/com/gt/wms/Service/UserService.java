@@ -16,4 +16,12 @@ public interface UserService {
 	List<User> getPageUserList(Map parMap);
 
 	int getPageNum(Map parMap);
+
+	int deleteUserById(User user);
+
+	User getUserById(String id);
+
+	int updateUser(User puser);
+
+	boolean uniqueCheck(User puser);
 }
