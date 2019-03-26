@@ -15,6 +15,7 @@ import com.gt.wms.Entity.User;
 import com.gt.wms.Service.UserService;
 import com.gt.wms.util.JsonResult;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -41,9 +42,15 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "logined/main")
-	public ModelAndView loginTest() {
+	public ModelAndView toMain() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("main");
 		return mav;
+	}
+
+	@RequestMapping(value = "logined/loginOut")
+	public String loginOut(HttpServletRequest request) {
+		request.getSession().invalidate();
+		return "redirect:/";
 	}
 }

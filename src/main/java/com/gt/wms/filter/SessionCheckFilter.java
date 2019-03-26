@@ -12,9 +12,11 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.gt.wms.Entity.User;
 import com.gt.wms.util.StaticFinalValue;
+import com.gt.wms.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
@@ -73,23 +75,28 @@ public class SessionCheckFilter implements Filter {
 //            logger.info("SessionCheckFilter working");
 
             HttpServletRequest hsr = (HttpServletRequest) request;
-            User user = (User) hsr.getSession().getAttribute("user");
-            if (user == null) {
-                HttpServletResponse res = (HttpServletResponse) response;
-                String servletPath = hsr.getServletPath();
-                for (String loginPath : loginPaths) {
-                    if (servletPath.matches(loginPath)) {
-                        chain.doFilter(request, response);
-                        return;
-                    }
+            HttpSession session = hsr.getSession(false);
+            HttpServletResponse res = (HttpServletResponse) response;
+
+            String servletPath = hsr.getServletPath();
+            for (String loginPath : loginPaths) {
+                if (servletPath.matches(loginPath)) {
+                    chain.doFilter(request, response);
+                    return;
                 }
-                String url = hsr.getContextPath();
-                res.sendRedirect(url);
-                return;
-            } else {
-                chain.doFilter(request, response);
-                return;
             }
+
+            String url = StringUtil.isNotEmpty(hsr.getContextPath()) ? hsr.getContextPath() : "/";
+            if (session != null) {
+                User user = (User) hsr.getSession().getAttribute("user");
+                if (user != null) {
+                    chain.doFilter(request, response);
+                    return;
+                }
+            }
+
+            res.sendRedirect(url);
+            return;
         }
     }
 

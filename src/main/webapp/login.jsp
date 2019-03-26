@@ -69,6 +69,11 @@
             })
         });
     });
+
+    /* https://blog.csdn.net/lp1052843207/article/details/77982458 */
+    if(window !=top){
+        top.location.href=location.href;
+    }
 </script>
 </body>
 </html>
