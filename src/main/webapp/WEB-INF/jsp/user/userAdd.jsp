@@ -178,7 +178,7 @@
                             </div>
                             <div class="col-md-6">
                                 <button id="addBtn" class="btn btn-primary">保存</button>
-                                <button id="restBtn" class="btn btn-warning">重置</button>
+                                <!--<button id="restBtn" class="btn btn-warning">重置</button>-->
                                 <button id="returnBtn" class="btn btn-secondary" onclick="goBack()">返回</button>
                             </div>
                         </div>
@@ -215,6 +215,8 @@
                             listHtml += '<option value="' + array[i].value + '">' + array[i].note + '</option>';
                         }
                         $("#user_type").append(listHtml);
+                    }else{
+                        alert(responseData.message);
                     }
                 } catch(e) {
 
@@ -249,6 +251,8 @@
                 success: function (responseData) {
                     if (responseData.result == 'success') {
                         location.href = "user/userPageList";
+                    }else{
+                        alert(responseData.message);
                     }
                 }
             }).fail(function() {

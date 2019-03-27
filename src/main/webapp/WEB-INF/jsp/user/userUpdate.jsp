@@ -217,6 +217,8 @@
                             listHtml += '<option value="' + array[i].value + '">' + array[i].note + '</option>';
                         }
                         $("#user_type").append(listHtml);
+                    }else{
+                        alert(responseData.message);
                     }
                 } catch(e) {
 
@@ -243,6 +245,8 @@
                     $('#address').val(userData.address);
                     $('#user_type').val(userData.user_type);
                     $('#note').val(userData.note);
+                }else{
+                    alert(responseData.message);
                 }
             }
         }).fail(function() {
@@ -274,6 +278,8 @@
                 success: function (responseData) {
                     if (responseData.result == 'success') {
                         location.href = "user/userPageList";
+                    }else{
+                        alert(responseData.message);
                     }
                 }
             }).fail(function() {

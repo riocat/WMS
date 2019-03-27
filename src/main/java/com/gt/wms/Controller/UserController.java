@@ -80,7 +80,7 @@ public class UserController {
             return new JsonResult(JsonResultStatus.fail, null, "用户添加失败");
         }
 
-        nub.setNewURL("user/userList");
+        nub.setNewURL("user/userPageList");
         return new JsonResult(JsonResultStatus.success, nub, null);
     }
 

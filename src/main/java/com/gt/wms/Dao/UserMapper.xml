@@ -216,6 +216,10 @@
 		FROM
 			sys_user
 		WHERE
-			loginid = #{loginid};
+			loginid = #{loginid}
+		<if test="id != null and id != ''">
+			AND id != #{id}
+		</if>
+		;
 	</select>
 </mapper>

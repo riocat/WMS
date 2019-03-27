@@ -7,6 +7,8 @@
 <script src="js/vendor/chart.js/chart.min.js"></script>
 <script src="js/carbon.js"></script>
 <script src="js/demo.js"></script>
+<script src="js/vendor/jquery/jquery.validate.js"></script>
+<script src="js/vendor/jquery/messages_zh.js"></script>
 <script>
     var visiblePages = 10;
     var defaultPageSize = 10;

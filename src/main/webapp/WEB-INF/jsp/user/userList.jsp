@@ -266,6 +266,8 @@
                             listHtml += '<option value="' + array[i].value + '">' + array[i].note + '</option>';
                         }
                         $("#userType").append(listHtml);
+                    }else{
+                        alert(responseData.message);
                     }
                 } catch(e) {
 
@@ -306,6 +308,8 @@
                     $('#detail_note').html(userData.note);
 
                     $('#myModal').modal('show');
+                }else{
+                    alert(responseData.message);
                 }
             }
         }).fail(function() {
