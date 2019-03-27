@@ -7,7 +7,7 @@ import java.util.Map;
 
 public interface UserService {
 
-	public User getUserByName(String name);
+	public User getUserByLoginid(String name);
 	
 	public int regester(User user) throws Exception;
 

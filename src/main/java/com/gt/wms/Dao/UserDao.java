@@ -7,7 +7,7 @@ import java.util.Map;
 
 public interface UserDao {
 
-	User getUserByName(String name);
+	User getUserByLoginid(String name);
 	
 	int regester(User user);
 

@@ -20,8 +20,8 @@ public class UserDaoImpl implements UserDao {
     @Autowired
     private SettingValue setting;
 
-    public User getUserByName(String name) {
-        return sqlSession.selectOne("getUserByName", name);
+    public User getUserByLoginid(String name) {
+        return sqlSession.selectOne("getUserByLoginid", name);
     }
 
     @Override

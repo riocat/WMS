@@ -22,7 +22,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header bg-light" style="padding: 0.3rem;">
-                        用户列表
+                        用户管理
                     </div>
 
                     <div class="card-body" style="padding: 0.4rem;">
