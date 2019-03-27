@@ -35,7 +35,7 @@
                             </div>
 
                             <div class="col-md-3 form-group" style="margin-bottom: 0.3rem;padding-top: .375rem;">
-                                <select id="selectType" class="form-control">
+                                <select id="userType" class="form-control" >
                                     <option value="" style="display: none">请选择用户类型</option>
                                 </select>
                             </div>
@@ -228,7 +228,7 @@
     }
 
     function selectUsers(){
-        location.href = "user/userPageList?selectName=" + escapeHtmlMax($('#selectName').val())+"&selectType="+$('#selectType').val()+"&pageSize="+defaultPageSize;
+        location.href = "user/userPageList?selectName=" + escapeHtmlMax($('#selectName').val())+"&userType="+$('#userType').val()+"&pageSize="+defaultPageSize;
     }
 
     var a = ${totalPages};
@@ -241,7 +241,7 @@
         currentPage : b,
         onPageChange : function(num, type) {
             if(type!='init'){
-                location.href = "user/userPageList?next=" + num + "&selectName=" + escapeHtmlMax($('#selectName').val())+"&selectType="+$('#selectType').val()+"&pageSize="+defaultPageSize;
+                location.href = "user/userPageList?next=" + num + "&selectName=" + escapeHtmlMax($('#selectName').val())+"&userType="+$('#userType').val()+"&pageSize="+defaultPageSize;
             }
         }
     });
@@ -257,25 +257,26 @@
             success: function (responseData) {
                 try {
                     if(responseData.result == 'success') {
-                        $('#selectType').html("");
-                        $('#selectType').append('<option value="" style="display: none">请选择用户类型</option>');
+                        $('#userType').html("");
+                        $('#userType').append('<option value="">请选择用户类型</option>');
+//                        $('#selectType').append('<option value="" style="display: none">请选择用户类型</option>');
                         var array = responseData.data;
                         var listHtml = '';
                         for(var i=0;i<array.length;i++){
                             listHtml += '<option value="' + array[i].value + '">' + array[i].note + '</option>';
                         }
-                        $("#selectType").append(listHtml);
+                        $("#userType").append(listHtml);
                     }
                 } catch(e) {
 
                 }
+
+                $('#selectName').val(selectName);
+                $("#userType").val(String(selectType));
             }
         }).fail(function() {
             alert( "无法连接服务器，请稍后重试" );
         })
-
-        $('#selectName').val(selectName);
-        $('#selectType').val(selectType);
     });
 
     function userDetail(userId){

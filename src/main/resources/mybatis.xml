@@ -4,7 +4,7 @@
 	<settings>
 		<setting name="cacheEnabled" value="true" />
 		<setting name="useGeneratedKeys" value="false" />
-		<setting name="mapUnderscoreToCamelCase" value="true" />
+		<setting name="mapUnderscoreToCamelCase" value="false" />
 		<setting name="defaultExecutorType" value="REUSE"/>
 		<setting name="logImpl" value="SLF4J"/>
 		

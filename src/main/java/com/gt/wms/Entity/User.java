@@ -220,4 +220,6 @@ public class User implements Serializable {
     public void setUser_type_name(String user_type_name) {
         this.user_type_name = user_type_name;
     }
+
+
 }

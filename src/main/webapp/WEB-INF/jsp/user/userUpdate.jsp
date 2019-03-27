@@ -147,10 +147,6 @@
                             <div class="col-md-9 form-group" style="margin-bottom: 0.3rem;padding-top: .375rem;">
                                 <select id="user_type" class="form-control">
                                     <option value="" style="display: none">请选择用户类型</option>
-                                    <option value="">2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
                                 </select>
                             </div>
                             <div class="col-md-1">
@@ -202,6 +198,34 @@
     }
 
     function init(){
+        $.ajax({
+            method: "POST",
+            url: "sysCode/getSysCodeList",
+            data: JSON.stringify({type:'5'}),
+            async:true,
+            dataType:"json",
+            contentType:"application/json;charset=UTF-8",
+            success: function (responseData) {
+                try {
+                    if(responseData.result == 'success') {
+                        $('#user_type').html("");
+                        $('#user_type').append('<option value="">请选择用户类型</option>');
+//                        $('#selectType').append('<option value="" style="display: none">请选择用户类型</option>');
+                        var array = responseData.data;
+                        var listHtml = '';
+                        for(var i=0;i<array.length;i++){
+                            listHtml += '<option value="' + array[i].value + '">' + array[i].note + '</option>';
+                        }
+                        $("#user_type").append(listHtml);
+                    }
+                } catch(e) {
+
+                }
+            }
+        }).fail(function() {
+            alert( "无法连接服务器，请稍后重试" );
+        })
+
         $.ajax({
             method: "POST",
             url: "user/getUserById?id="+targetId,

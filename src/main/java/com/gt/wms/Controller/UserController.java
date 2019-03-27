@@ -31,7 +31,7 @@ public class UserController {
     @RequestMapping(value = "user/userPageList")
     public ModelAndView getUserPageList(@RequestParam(defaultValue = "1", required = false) int next,
                                         @RequestParam(defaultValue = "", required = false) String selectName,
-                                        @RequestParam(defaultValue = "", required = false) String selectType,
+                                        @RequestParam(defaultValue = "", required = false , name = "userType") String selectType,
                                         @RequestParam(defaultValue = "0", required = false) int pageSize) {
         ModelAndView mav = new ModelAndView("user/userList");
         Map parMap = new HashMap<>();
