@@ -69,10 +69,10 @@ public class LoginController {
                 for (Permission sp : subPermissions) {
                     stringBuffer.append("<li class='nav-item subitem'>");
                     if (StringUtil.isNotEmpty(sp.getUrl())) {
-                        stringBuffer.append("<a onclick='changeIframe(\"" + sp.getUrl() + "\")' name='"+sp.getUrl()+"' class='nav-link' style='color:#f8f9fa;'>");
+                        stringBuffer.append("<a onclick='changeIframe(this,\"" + sp.getUrl() + "\")' name='"+sp.getUrl()+"' class='nav-link' style='color:#f8f9fa;'>");
 
                     } else {
-                        stringBuffer.append("<a onclick='changeIframe(\"/\")' class='nav-link' style='color:#f8f9fa;'>");
+                        stringBuffer.append("<a onclick='changeIframe(this,\"/\")' class='nav-link' style='color:#f8f9fa;'>");
 
                     }
                     stringBuffer.append("<i class='icon .icon-pencil'></i> " + sp.getName());

@@ -24,6 +24,7 @@
                     </div>
 
                     <div class="card-body">
+                        <form id="userUpdateForm">
 
                         <div class="row">
                             <div class="col-md-2">
@@ -33,7 +34,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <input id="loginid" class="form-control">
+                                    <input id="loginid" name="loginid" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-1">
@@ -48,7 +49,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <input id="name" class="form-control">
+                                    <input id="name" name="name" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-1">
@@ -65,7 +66,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <input id="password" class="form-control" type="password">
+                                    <input id="password" name="password" class="form-control" type="password">
                                 </div>
                             </div>
                             <div class="col-md-1">
@@ -80,7 +81,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <input id="passwordConfirm" class="form-control" type="password">
+                                    <input id="passwordConfirm" name="passwordConfirm" class="form-control" type="password">
                                 </div>
                             </div>
                             <div class="col-md-1">
@@ -97,7 +98,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <input id="email" class="form-control">
+                                    <input id="email" name="email" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-1">
@@ -112,7 +113,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <input id="phone" class="form-control">
+                                    <input id="phone" name="phone" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-1">
@@ -129,7 +130,7 @@
                             </div>
                             <div class="col-md-9">
                                 <div class="form-group">
-                                    <input id="address" class="form-control">
+                                    <input id="address" name="address" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-1">
@@ -145,7 +146,7 @@
                                 </div>
                             </div>
                             <div class="col-md-9 form-group" style="margin-bottom: 0.3rem;padding-top: .375rem;">
-                                <select id="user_type" class="form-control">
+                                <select id="user_type" name="user_type" class="form-control">
                                     <option value="" style="display: none">请选择用户类型</option>
                                 </select>
                             </div>
@@ -163,7 +164,7 @@
                             </div>
                             <div class="col-md-9">
                                 <div class="form-group">
-                                    <textarea id="note" class="form-control" rows="6"></textarea>
+                                    <textarea id="note" name="note" class="form-control" rows="6"></textarea>
                                 </div>
                             </div>
                             <div class="col-md-1">
@@ -172,7 +173,7 @@
                             </div>
                         </div>
 
-
+                        </form>
                         <div class="row">
                             <div class="col-md-2">
                                 <div class="form-group" style="margin-bottom: 0.3rem;">
@@ -257,7 +258,34 @@
     $(function() {
         init();
 
+        $("#userUpdateForm").validate({
+            rules: {
+                loginid: {
+                    required: true
+                },
+                name: {
+                    required: true
+                },
+                password: {
+                    required: true
+                },
+                passwordConfirm:{
+                    required: true,
+                    equalTo:'#password'
+                },
+                email:{
+                    email:true
+                }
+            }
+        });
+
         $('#addBtn').click(function() {
+
+            var pass = $("#userUpdateForm").valid();
+            if(!pass){
+                return;
+            }
+
             var newuser = {};
             newuser.id = targetId;
             newuser.loginid = $('#loginid').val();

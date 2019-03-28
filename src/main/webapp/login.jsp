@@ -62,6 +62,8 @@
                 success: function (responseData) {
                     if (responseData.result == 'success') {
                         location.href = "logined/main";
+                    }else{
+                        alert(responseData.message);
                     }
                 }
             }).fail(function() {

@@ -15,7 +15,9 @@
     </style>
     <script src="js/angular.min.js"></script>
     <script>
-        function changeIframe(url){
+        function changeIframe(item,url){
+            $(".subitem").css("background-color","#796f6f");
+            $(item).parent().css("background-color","#889db1");
             $('#mainIframe').attr("src",url);
         }
 
