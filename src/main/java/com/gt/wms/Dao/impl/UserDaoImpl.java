@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.gt.wms.Dao.UserDao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -40,7 +41,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> getPageUserList(Map parMap) {
-        List<User> users = null;
+        List<User> users = new ArrayList();
         if ("MSSQL".equals(setting.dbtype)) {
             users = sqlSession.selectList("getPageUserListMS", parMap);
         }
