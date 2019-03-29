@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gt.wms.Dao.UserDao">
-	<select id="getUserByName" parameterType="string"
+	<select id="getUserByLoginid" parameterType="string"
 		resultType="com.gt.wms.Entity.User">
-		SELECT * FROM sys_user u WHERE u.name = #{name}
+		SELECT * FROM sys_user u WHERE is_delete = '0' AND u.loginid = #{Loginid}
 	</select>
 
 	<insert id="regester" parameterType="com.gt.wms.Entity.User">
@@ -12,7 +12,7 @@
 		VALUES(#{name},#{password},#{email},now())
 	</insert>
 
-	<insert id="addUser" parameterType="com.gt.wms.Entity.User">
+	<insert id="addUserMS" parameterType="com.gt.wms.Entity.User">
 		INSERT INTO [dbo].[sys_user] (
 			[id],
 			[loginid],
@@ -59,4 +59,167 @@
 			NULL
 		);
 	</insert>
+
+	<select id="getPageUserListMS" parameterType="Map" resultType="com.gt.wms.Entity.User">
+		SELECT
+			TOP ${pageSize} *
+		FROM
+			(
+				SELECT
+					row_number () OVER (ORDER BY create_time DESC) rownum ,
+					sys_user.*,
+					STUFF(
+						(
+						SELECT
+						',' + store_region.name
+						FROM
+						(
+						SELECT
+						*
+						FROM
+						user_to_store
+						WHERE
+						type = '1'
+						AND user_id = id
+						) coretemp
+						INNER JOIN store_region ON coretemp.area_id = store_region.id FOR XML PATH ('')
+						),
+						1,
+						1,
+						''
+					) store_region_name,
+					STUFF(
+						(
+						SELECT
+						',' + store.name
+						FROM
+						(
+						SELECT
+						*
+						FROM
+						user_to_store
+						WHERE
+						type = '2'
+						AND user_id = id
+						) coretemp
+						INNER JOIN store ON coretemp.area_id = store.id FOR XML PATH ('')
+						),
+						1,
+						1,
+						''
+					) store_name
+				FROM
+					sys_user
+				WHERE
+					is_delete = '0'
+				<if test="selectName != null and selectName != ''">
+					AND (loginid LIKE '%'+#{selectName}+'%' OR name LIKE '%'+#{selectName}+'%')
+				</if>
+				<if test="selectType != null and selectType != ''">
+					AND user_type = #{selectType}
+				</if>
+			) coretem
+		WHERE
+			rownum > ${start};
+	</select>
+
+	<select id="getPageNumMS" parameterType="Map" resultType="int">
+		SELECT
+			COUNT(*) num
+		FROM
+			sys_user
+		WHERE
+			is_delete = '0'
+		<if test="selectName != null and selectName != ''">
+			AND (loginid LIKE '%'+#{selectName}+'%' OR name LIKE '%'+#{selectName}+'%')
+		</if>
+		<if test="selectType != null and selectType != ''">
+			AND user_type = #{selectType}
+		</if>
+	</select>
+
+	<delete id="deleteUserByIdMS" parameterType="com.gt.wms.Entity.User">
+		UPDATE sys_user
+		SET is_delete = '1',
+		 delete_user = #{delete_user},
+		 delete_time = GETDATE()
+		WHERE
+			id = #{id};
+	</delete>
+
+	<select id="getUserByIdMS" parameterType="string" resultType="com.gt.wms.Entity.User">
+		SELECT
+			buser.id,
+			buser.loginid,
+			buser.name,
+			buser.password,
+			buser.password_change_flag,
+			buser.email,
+			buser.phone,
+			buser.address,
+			buser.user_type,
+			buser.note,
+			buser.last_login_time,
+			buser.status,
+			buser.token,
+			buser.is_delete,
+			CONVERT(VARCHAR(19),buser.create_time,20) create_time,
+			buser.create_user,
+			cuser.name cuser_name,
+			CONVERT(VARCHAR(19),buser.update_time,20) update_time,
+			buser.update_user,
+			uuser.name uuser_name,
+			buser.delete_user,
+			duser.name duser_name,
+			CONVERT(VARCHAR(19),buser.delete_time,20) delete_time,
+			scode.note user_type_name
+		FROM
+			sys_user buser
+		LEFT JOIN
+			sys_user cuser ON buser.create_user = cuser.id
+		LEFT JOIN
+			sys_user uuser ON buser.update_user = uuser.id
+		LEFT JOIN
+			sys_user duser ON buser.delete_user = duser.id
+		LEFT JOIN
+			sys_code scode ON scode.value = buser.user_type AND scode.type = '5'
+		WHERE
+			buser.id = #{id};
+	</select>
+
+	<update id="updateUserMS" parameterType="com.gt.wms.Entity.User">
+		UPDATE sys_user
+		SET
+			loginid = #{loginid},
+			name = #{name},
+			password = #{password},
+			email = #{email},
+			phone = #{phone},
+			address = #{address},
+			user_type = #{user_type},
+			note = #{note},
+			last_login_time = NULL,
+		<if test="status != null and status != ''">
+			status = #{status},
+		</if>
+			token = NULL,
+			is_delete = '0',
+			update_time = GETDATE(),
+			update_user = #{update_user}
+		WHERE
+			id = #{id};
+	</update>
+
+	<select id="uniqueCheck" parameterType="com.gt.wms.Entity.User" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			sys_user
+		WHERE
+			loginid = #{loginid}
+		<if test="id != null and id != ''">
+			AND id != #{id}
+		</if>
+		;
+	</select>
 </mapper>

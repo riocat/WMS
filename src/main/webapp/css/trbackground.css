@@ -1,0 +1,4 @@
+.table-striped-row tbody tr:nth-of-type(odd){background-color:rgba(68,68,68,.05)}
+.table-striped-row tbody tr:hover{
+    background-color:rgba(253,224,137,1);
+}
