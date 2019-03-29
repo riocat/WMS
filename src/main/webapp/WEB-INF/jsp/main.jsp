@@ -12,12 +12,16 @@
         .subitem:hover{
             background-color: #889db1;
         }
+
+        .clickedMenu{
+            background-color: #889db1;
+        }
     </style>
     <script src="js/angular.min.js"></script>
     <script>
         function changeIframe(item,url){
-            $(".subitem").css("background-color","#796f6f");
-            $(item).parent().css("background-color","#889db1");
+            $(".subitem").removeClass("clickedMenu");
+            $(item).parent().addClass("clickedMenu");
             $('#mainIframe').attr("src",url);
         }
 
