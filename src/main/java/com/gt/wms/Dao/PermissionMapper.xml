@@ -8,4 +8,43 @@
 		FROM
 			permission;
 	</select>
+
+	<select id="getSimplePermissionList" resultType="com.gt.wms.Entity.Permission">
+		SELECT
+			permission.id,
+			permission.name,
+			permission.descript,
+			permission.type,
+			permission."level",
+			permission.parent,
+			permission.url,
+			permission.code,
+			permission.create_user,
+			permission.create_time,
+			permission.update_user,
+			permission.update_time,
+			permission.is_delete,
+			permission.delete_user,
+			permission.delete_time,
+			permission."order",
+			CASE
+			WHEN EXISTS (
+				SELECT
+					1
+				FROM
+					permission tem
+				WHERE
+					tem.parent = permission.id
+			)
+			OR (
+				permission.type = '1'
+				AND permission.[level] = '1'
+			) THEN
+				1
+			ELSE
+				0
+			END isParent
+		FROM
+			permission
+	</select>
 </mapper>

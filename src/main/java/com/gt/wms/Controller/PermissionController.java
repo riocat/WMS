@@ -44,7 +44,7 @@ public class PermissionController {
     @RequestMapping(value = "getZtreeData")
     @ResponseBody
     public JsonResult getZtreeDataPermission() {
-        List<Permission> list = permissionService.getAllLevelPermissionList();
+        List<Permission> list = permissionService.getSimplePermissionList();
         return new JsonResult(JsonResultStatus.success, list, null);
     }
 }

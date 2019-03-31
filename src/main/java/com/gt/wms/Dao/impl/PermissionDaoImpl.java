@@ -38,4 +38,9 @@ public class PermissionDaoImpl implements PermissionDao {
     public int uniqueCheck(Permission permission) {
         return sqlSession.selectOne("uniqueCheck", permission);
     }
+
+    @Override
+    public List<Permission> getSimplePermissionList() {
+        return sqlSession.selectList("getSimplePermissionList");
+    }
 }

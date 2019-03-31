@@ -18,5 +18,5 @@ public interface PermissionService {
 
     List<Permission> getLevelPermissionList(List<Permission> base);
 
-    List<Permission> getAllLevelPermissionList();
+    List<Permission> getSimplePermissionList();
 }

@@ -15,4 +15,6 @@ public interface PermissionDao {
     int getPageNum(Map parMap);
 
     int uniqueCheck(Permission permission);
+
+    List<Permission> getSimplePermissionList();
 }

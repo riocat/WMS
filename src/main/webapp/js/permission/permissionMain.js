@@ -14,7 +14,9 @@ var setting = {
     },
     data: {
         simpleData: {
-            enable: true
+            enable: true,
+            idKey: "id",
+            pIdKey: "parent"
         },
         keep: {
             parent:true,

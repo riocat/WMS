@@ -35,9 +35,8 @@ public class PermissionServiceImpl implements PermissionService {
     }
 
     @Override
-    public List<Permission> getAllLevelPermissionList() {
-        List<Permission> list = getLevelPermissionList(getAllPermissionList(new HashMap()));
-        return list;
+    public List<Permission> getSimplePermissionList() {
+        return permissionDao.getSimplePermissionList();
     }
 
     @Override
@@ -87,6 +86,8 @@ public class PermissionServiceImpl implements PermissionService {
         Collections.sort(targetList, new PermissionComparator());
 
         for (Permission p : targetList) {
+            if(p.getSubPermissions().size()>0)
+                p.setIsParent(true);
             sortList(p.getSubPermissions());
         }
     }

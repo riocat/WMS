@@ -32,6 +32,8 @@ public class Permission implements Serializable {
     private Permission parentEntity;
     private List<Permission> subPermissions = new ArrayList<Permission>();
 
+    private boolean isParent;
+
     public String getId() {
         return id;
     }
@@ -197,5 +199,13 @@ public class Permission implements Serializable {
     @Override
     public int hashCode() {
         return this.getId() == null ? 31 * 17 : this.getId().hashCode();
+    }
+
+    public boolean getIsParent() {
+        return isParent;
+    }
+
+    public void setIsParent(boolean isParent) {
+        this.isParent = isParent;
     }
 }
