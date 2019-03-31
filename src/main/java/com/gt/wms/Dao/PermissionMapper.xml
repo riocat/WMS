@@ -2,7 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gt.wms.Dao.PermissionDao">
 
-	<select id="getPagePermissionListMS" parameterType="map" resultType="com.gt.wms.Entity.Permission">
-
+	<select id="getAllPermissionList" parameterType="map" resultType="com.gt.wms.Entity.Permission">
+		SELECT
+			*
+		FROM
+			permission;
 	</select>
 </mapper>

@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public interface PermissionDao {
 
-    List<Permission> getPagePermissionList(Map parMap);
+    List<Permission> getAllPermissionList(Map parMap);
 
     int getPageNum(Map parMap);
 

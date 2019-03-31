@@ -24,11 +24,8 @@ public class PermissionDaoImpl implements PermissionDao {
     private SettingValue setting;
 
     @Override
-    public List<Permission> getPagePermissionList(Map parMap) {
-        List<Permission> permissions = null;
-        if ("MSSQL".equals(setting.dbtype)) {
-            permissions = sqlSession.selectList("getPagePermissionListMS", parMap);
-        }
+    public List<Permission> getAllPermissionList(Map parMap) {
+        List<Permission> permissions = sqlSession.selectList("getAllPermissionList", parMap);
         return permissions;
     }
 

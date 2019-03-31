@@ -10,9 +10,13 @@ import java.util.Map;
  */
 public interface PermissionService {
 
-    List<Permission> getPagePermissionList(Map parMap);
+    List<Permission> getAllPermissionList(Map parMap);
 
     int getPageNum(Map parMap);
 
     boolean uniqueCheck(Permission permission);
+
+    List<Permission> getLevelPermissionList(List<Permission> base);
+
+    List<Permission> getAllLevelPermissionList();
 }
