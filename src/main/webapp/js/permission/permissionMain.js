@@ -23,6 +23,9 @@ var setting = {
             leaf:true
         }
     },
+    check: {
+        enable: true
+    },
     callback: {
         beforeRemove: beforeRemove,
         beforeRename: beforeRename,

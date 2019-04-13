@@ -34,6 +34,8 @@ public class Permission implements Serializable {
 
     private boolean isParent;
 
+    private boolean nocheck;
+
     public String getId() {
         return id;
     }
@@ -207,5 +209,13 @@ public class Permission implements Serializable {
 
     public void setIsParent(boolean isParent) {
         this.isParent = isParent;
+    }
+
+    public boolean isNocheck() {
+        return nocheck;
+    }
+
+    public void setNocheck(boolean nocheck) {
+        this.nocheck = nocheck;
     }
 }
